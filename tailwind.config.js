@@ -7,21 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0a0f1d',
-        surface: '#171e2e',
-        surfaceHover: '#222b40',
-        primary: '#3b82f6',
-        primaryHover: '#2563eb',
-        accent: '#8b5cf6',
+        background: '#09090b', // zinc-950
+        surface: '#18181b', // zinc-900
+        surfaceHover: '#27272a', // zinc-800
+        primary: '#0ea5e9', // vivid sky blue
+        primaryHover: '#0284c7',
+        accent: '#c026d3', // neon fuchsia
         text: '#f8fafc',
-        textMuted: '#94a3b8',
-        border: '#1e293b'
+        textMuted: '#a1a1aa',
+        border: '#27272a'
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Outfit', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'glass': '0 4px 30px rgba(0, 0, 0, 0.5)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
+        'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
+        'glow-accent': '0 0 20px rgba(192, 38, 211, 0.3)'
       }
     },
   },

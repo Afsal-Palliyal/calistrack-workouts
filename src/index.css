@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
   
   body {
-    @apply bg-background text-text font-sans antialiased;
+    @apply bg-background text-text font-sans antialiased selection:bg-primary/30;
   }
 
   /* Custom scrollbar for sleek aesthetic */
@@ -17,24 +17,29 @@
     @apply bg-background;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-surfaceHover rounded-full;
+    @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-surface/80 backdrop-blur-md border border-border/50 shadow-glass rounded-2xl;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass rounded-[20px] relative overflow-hidden;
+  }
+  
+  .glass-panel::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50 pointer-events-none;
   }
   
   .btn-primary {
-    @apply flex items-center justify-center space-x-2 w-full py-3 px-4 bg-primary hover:bg-primaryHover text-white font-medium rounded-xl transition-all duration-300 ease-out active:scale-[0.98] shadow-[0_0_15px_rgba(59,130,246,0.3)];
+    @apply flex items-center justify-center space-x-2 w-full py-3.5 px-6 bg-primary hover:bg-primaryHover text-white font-semibold rounded-2xl transition-all duration-300 ease-out active:scale-[0.98] shadow-glow hover:shadow-[0_0_25px_rgba(14,165,233,0.5)];
   }
 
   .btn-secondary {
-    @apply flex items-center justify-center space-x-2 w-full py-3 px-4 bg-surfaceHover hover:bg-surface text-text font-medium rounded-xl transition-all duration-300 ease-out active:scale-[0.98] border border-border/50;
+    @apply flex items-center justify-center space-x-2 w-full py-3.5 px-6 bg-white/5 hover:bg-white/10 text-text font-semibold rounded-2xl transition-all duration-300 ease-out active:scale-[0.98] border border-white/10 backdrop-blur-md;
   }
 
   .input-field {
-    @apply w-full bg-surface/50 border border-border text-text rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all placeholder-textMuted;
+    @apply w-full bg-black/20 border border-white/10 text-white rounded-2xl p-4 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all placeholder-textMuted shadow-inner;
   }
 }

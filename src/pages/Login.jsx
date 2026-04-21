@@ -35,21 +35,22 @@ export function Login() {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col items-center">
-      <div className="bg-primary/20 p-4 rounded-full mb-6 relative">
-        <div className="absolute inset-0 bg-primary/40 blur-xl rounded-full"></div>
-        <Activity size={48} className="text-primary relative z-10" />
+    <div className="w-full max-w-sm mx-auto flex flex-col items-center justify-center min-h-screen px-4 pb-20 pt-10">
+      <div className="bg-primary/10 p-5 rounded-full mb-8 relative shadow-[0_0_30px_rgba(14,165,233,0.3)]">
+        <div className="absolute inset-0 bg-primary/30 blur-2xl rounded-full"></div>
+        <Activity size={56} className="text-primary relative z-10 drop-shadow-[0_0_10px_rgba(14,165,233,0.6)]" />
       </div>
-      <h1 className="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+      <h1 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent tracking-tight">
         Calistrack
       </h1>
-      <p className="text-textMuted mb-8 text-center">Track your bodyweight journey</p>
+      <p className="text-textMuted mb-10 text-center font-medium tracking-wide">Track your bodyweight journey</p>
 
-      <Card className="w-full">
-        <h2 className="text-xl font-semibold mb-4 text-center">
+      <Card className="w-full relative shadow-glow">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-[20px] pointer-events-none"></div>
+        <h2 className="text-2xl font-bold mb-6 text-center text-white/90">
           {isLogin ? 'Welcome Back' : 'Create Account'}
         </h2>
-        {error && <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-lg mb-4 text-sm text-center">{error}</div>}
+        {error && <div className="bg-red-500/10 border border-red-500/30 text-red-400 p-3 rounded-xl mb-6 text-sm text-center font-medium shadow-inner">{error}</div>}
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -72,17 +73,17 @@ export function Login() {
               className="input-field"
             />
           </div>
-          <Button type="submit" disabled={loading} className="mt-2">
+          <Button type="submit" disabled={loading} className="mt-4 py-4 text-lg tracking-wide shadow-glow">
             {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-textMuted">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
+        <div className="mt-8 text-center text-sm font-medium text-textMuted gap-1 flex justify-center">
+          {isLogin ? "Don't have an account?" : "Already have an account?"}
           <button 
             type="button" 
             onClick={() => setIsLogin(!isLogin)}
-            className="text-primary hover:text-primaryHover font-medium transition-colors"
+            className="text-primary hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-primary after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform ml-1"
           >
             {isLogin ? 'Sign up' : 'Log in'}
           </button>

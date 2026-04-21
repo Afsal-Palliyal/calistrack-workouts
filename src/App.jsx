@@ -17,23 +17,16 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route path="login" element={<Login />} />
-            <Route index element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            } />
-            <Route path="log" element={
-              <PrivateRoute>
-                <Logger />
-              </PrivateRoute>
-            } />
-            <Route path="history" element={
-              <PrivateRoute>
-                <History />
-              </PrivateRoute>
-            } />
+          <Route path="/login" element={<Login />} />
+          
+          <Route path="/" element={
+            <PrivateRoute>
+              <MainLayout />
+            </PrivateRoute>
+          }>
+            <Route index element={<Dashboard />} />
+            <Route path="log" element={<Logger />} />
+            <Route path="history" element={<History />} />
           </Route>
         </Routes>
       </BrowserRouter>
