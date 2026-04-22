@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { db } from '../firebase';
 import { collection, query, where, onSnapshot, orderBy, limit, doc, deleteDoc } from 'firebase/firestore';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
 
 export function History() {
   const { currentUser } = useAuth();
@@ -42,9 +43,10 @@ export function History() {
       
       try {
         await deleteDoc(doc(db, 'workouts', docId));
+        toast.error('Workout deleted', { icon: '🗑️' });
       } catch (error) {
         console.error("Error deleting workout:", error);
-        alert("Failed to delete workout. Please try again.");
+        toast.error("Failed to delete workout.");
       }
     }
   };
@@ -60,7 +62,65 @@ export function History() {
 
       <div className="space-y-4">
         {loading ? (
-          <div className="text-center text-textMuted py-8 font-medium">Loading history...</div>
+          <>
+            <Card className="animate-pulse bg-white/5 border-white/5">
+              <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
+                <div className="h-6 w-32 bg-white/10 rounded-md"></div>
+                <div className="flex gap-3">
+                  <div className="h-6 w-24 bg-white/10 rounded-full"></div>
+                  <div className="h-6 w-6 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+            </Card>
+            <Card className="animate-pulse bg-white/5 border-white/5">
+              <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
+                <div className="h-6 w-32 bg-white/10 rounded-md"></div>
+                <div className="flex gap-3">
+                  <div className="h-6 w-24 bg-white/10 rounded-full"></div>
+                  <div className="h-6 w-6 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+            </Card>
+            <Card className="animate-pulse bg-white/5 border-white/5">
+              <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
+                <div className="h-6 w-32 bg-white/10 rounded-md"></div>
+                <div className="flex gap-3">
+                  <div className="h-6 w-24 bg-white/10 rounded-full"></div>
+                  <div className="h-6 w-6 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+                <div className="flex justify-between items-center p-3.5 rounded-xl bg-black/10">
+                  <div className="h-4 w-20 bg-white/10 rounded-md"></div>
+                  <div className="h-5 w-24 bg-white/10 rounded-md"></div>
+                </div>
+              </div>
+            </Card>
+          </>
         ) : workouts.length === 0 ? (
           <Card className="text-center py-10 border-dashed border-2 border-white/10 bg-white/5">
             <Dumbbell className="mx-auto text-textMuted mb-4 opacity-50 drop-shadow-md" size={48} />

@@ -41,32 +41,41 @@ export function Dashboard() {
         const formattedDate = format(new Date(docDate), 'MMM dd');
         uniqueWorkoutDays.add(formattedDate);
         
+        if (!dailyTotals[formattedDate]) {
+          dailyTotals[formattedDate] = { Pushups: 0, Pullups: 0, Dips: 0, _total: 0 };
+        }
+        
         let dayTotal = 0;
         if (data.exercises && Array.isArray(data.exercises)) {
-           dayTotal = data.exercises.reduce((acc, ex) => acc + (parseInt(ex.reps) || 0) * (parseInt(ex.sets) || 1), 0);
+           data.exercises.forEach(ex => {
+             const vol = (parseInt(ex.reps) || 0) * (parseInt(ex.sets) || 1);
+             dayTotal += vol;
+             
+             // Track core movements for volume trend
+             if (ex.name === 'Pushups') dailyTotals[formattedDate].Pushups += vol;
+             if (ex.name === 'Pullups') dailyTotals[formattedDate].Pullups += vol;
+             if (ex.name === 'Dips') dailyTotals[formattedDate].Dips += vol;
+           });
         }
+        
+        dailyTotals[formattedDate]._total += dayTotal;
 
         // Add to weekly total if within the current week
         if (isAfter(new Date(docDate), new Date(startOfCurrentWeek)) || new Date(docDate).toISOString() === startOfCurrentWeek) {
           currentWeeklyReps += dayTotal;
         }
-
-        // Aggregate per day for the chart
-        if (dailyTotals[formattedDate]) {
-           dailyTotals[formattedDate] += dayTotal;
-        } else {
-           dailyTotals[formattedDate] = dayTotal;
-        }
       });
 
       const finalChartData = Object.keys(dailyTotals).map(date => ({
         date,
-        reps: dailyTotals[date]
+        Pushups: dailyTotals[date].Pushups,
+        Pullups: dailyTotals[date].Pullups,
+        Dips: dailyTotals[date].Dips,
       }));
       
       // Ensure there's always a baseline to render empty charts gracefully
       if (finalChartData.length === 0) {
-          finalChartData.push({ date: format(new Date(), 'MMM dd'), reps: 0 });
+          finalChartData.push({ date: format(new Date(), 'MMM dd'), Pushups: 0, Pullups: 0, Dips: 0 });
       }
 
       setChartData(finalChartData);
@@ -99,12 +108,12 @@ export function Dashboard() {
         <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
           <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-primary/20 via-white/5 to-transparent border-primary/30 hover:border-primary/50 transition-all hover:shadow-glow group cursor-default h-full">
             <Flame size={40} className="text-primary mb-4 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(14,165,233,0.8)]" />
-            <span className="text-5xl font-bold text-white">{loading ? '-' : weeklyReps}</span>
+            {loading ? <div className="w-16 h-12 bg-white/10 animate-pulse rounded-xl mb-1" /> : <span className="text-5xl font-bold text-white">{weeklyReps}</span>}
             <span className="text-[12px] font-bold text-primary uppercase tracking-widest mt-3 text-center opacity-80">Weekly Reps</span>
           </Card>
           <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-accent/20 via-white/5 to-transparent border-accent/30 hover:border-accent/50 transition-all hover:shadow-glow-accent group cursor-pointer h-full">
             <Trophy size={40} className="text-accent mb-4 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(192,38,211,0.8)]" />
-            <span className="text-5xl font-bold text-white">{loading ? '-' : totalWorkouts}</span>
+            {loading ? <div className="w-16 h-12 bg-white/10 animate-pulse rounded-xl mb-1" /> : <span className="text-5xl font-bold text-white">{totalWorkouts}</span>}
             <span className="text-[12px] font-bold text-accent uppercase tracking-widest mt-3 text-center opacity-80">Workouts (30D)</span>
           </Card>
         </div>
@@ -112,11 +121,11 @@ export function Dashboard() {
         {/* Right Column (Chart) */}
         <div className="lg:col-span-2">
           <Card className="h-full flex flex-col min-h-[350px]">
-            <h2 className="text-xl font-bold mb-6 text-white/90">Progress (Last 30 Days)</h2>
-            <div className="flex-1 w-full relative">
-              <div className="absolute inset-0">
+            <h2 className="text-xl font-bold mb-6 text-white/90">Volume Trend (Core Movements)</h2>
+            <div className="flex-1 w-full relative min-h-[300px]">
+              <div className="absolute inset-0 w-full h-full">
                 {loading ? (
-                  <div className="flex items-center justify-center h-full text-textMuted font-medium">Loading chart...</div>
+                  <div className="w-full h-full bg-white/5 animate-pulse rounded-[20px]" />
                 ) : (
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={chartData}>
@@ -125,17 +134,38 @@ export function Dashboard() {
                       <YAxis stroke="#a1a1aa" tick={{ fill: '#a1a1aa', fontSize: 12, fontWeight: 500 }} tickLine={false} axisLine={false} width={40} dx={-10} />
                       <Tooltip 
                         contentStyle={{ backgroundColor: 'rgba(24, 24, 27, 0.8)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)' }} 
-                        itemStyle={{ color: '#0ea5e9', fontWeight: 'bold' }}
+                        itemStyle={{ fontWeight: 'bold' }}
                         cursor={{ stroke: 'rgba(255,255,255,0.1)', strokeWidth: 2 }}
                       />
                       <Line 
+                        name="Pushups"
                         type="monotone" 
-                        dataKey="reps" 
+                        dataKey="Pushups" 
                         stroke="#0ea5e9" 
-                        strokeWidth={4} 
-                        dot={{ fill: '#09090b', stroke: '#0ea5e9', strokeWidth: 2, r: 4 }} 
-                        activeDot={{ r: 7, fill: '#0ea5e9', stroke: '#fff', strokeWidth: 2 }} 
+                        strokeWidth={3} 
+                        dot={{ fill: '#09090b', stroke: '#0ea5e9', strokeWidth: 2, r: 3 }} 
+                        activeDot={{ r: 6, fill: '#0ea5e9', stroke: '#fff', strokeWidth: 2 }} 
                         style={{ filter: "drop-shadow(0px 4px 8px rgba(14, 165, 233, 0.4))" }}
+                      />
+                      <Line 
+                        name="Pullups"
+                        type="monotone" 
+                        dataKey="Pullups" 
+                        stroke="#10b981" 
+                        strokeWidth={3} 
+                        dot={{ fill: '#09090b', stroke: '#10b981', strokeWidth: 2, r: 3 }} 
+                        activeDot={{ r: 6, fill: '#10b981', stroke: '#fff', strokeWidth: 2 }} 
+                        style={{ filter: "drop-shadow(0px 4px 8px rgba(16, 185, 129, 0.4))" }}
+                      />
+                      <Line 
+                        name="Dips"
+                        type="monotone" 
+                        dataKey="Dips" 
+                        stroke="#c026d3" 
+                        strokeWidth={3} 
+                        dot={{ fill: '#09090b', stroke: '#c026d3', strokeWidth: 2, r: 3 }} 
+                        activeDot={{ r: 6, fill: '#c026d3', stroke: '#fff', strokeWidth: 2 }} 
+                        style={{ filter: "drop-shadow(0px 4px 8px rgba(192, 38, 211, 0.4))" }}
                       />
                     </LineChart>
                   </ResponsiveContainer>

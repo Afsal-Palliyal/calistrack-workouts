@@ -6,6 +6,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { RestTimer } from '../components/UI/RestTimer';
 
 const DEFAULT_EXERCISES = [
   { name: 'Pushups', sets: 3, reps: 10 },
@@ -20,14 +22,6 @@ export function Logger() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [exercises, setExercises] = useState(DEFAULT_EXERCISES);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
-
-  const showToast = (message, type = 'success') => {
-    setToast({ show: true, message, type });
-    setTimeout(() => {
-      setToast(prev => ({ ...prev, show: false }));
-    }, 3000);
-  };
 
   const updateExercise = (index, field, delta, isAbsolute = false, absoluteValue = 0) => {
     const newExercises = [...exercises];
@@ -49,27 +43,21 @@ export function Logger() {
         exercises: exercises.filter(ex => ex.sets > 0 && ex.reps > 0),
         createdAt: serverTimestamp()
       });
-      showToast('Workout saved successfully!', 'success');
+      toast.success('Workout saved successfully!');
       setTimeout(() => {
         navigate('/history');
       }, 1200);
     } catch (error) {
       console.error("Error saving workout:", error);
-      showToast('Failed to save workout. Please try again.', 'error');
+      toast.error('Failed to save workout. Please try again.');
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto relative relative">
+    <div className="space-y-6 max-w-3xl mx-auto relative">
       
-      {/* Toast Notification */}
-      <div className={`fixed top-24 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${toast.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-        <div className={`flex items-center gap-3 px-6 py-3 rounded-2xl shadow-xl backdrop-blur-xl border ${toast.type === 'success' ? 'bg-primary/20 border-primary/30 text-primary' : 'bg-red-500/20 border-red-500/30 text-red-400'}`}>
-          {toast.type === 'success' ? <CheckCircle2 size={20} /> : <AlertCircle size={20} />}
-          <span className="font-bold tracking-wide">{toast.message}</span>
-        </div>
-      </div>
+      <RestTimer />
 
       <header className="mt-2 text-center md:text-left">
         <h1 className="text-3xl font-bold flex items-center justify-center md:justify-start gap-2 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
