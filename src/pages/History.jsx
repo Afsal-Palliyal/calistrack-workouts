@@ -55,7 +55,7 @@ export function History() {
     <div className="space-y-6 max-w-4xl mx-auto">
       <header className="mt-2 text-center md:text-left">
         <h1 className="text-3xl font-bold flex items-center justify-center md:justify-start gap-2 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-          <Clock className="text-primary drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]" /> Workout History
+          <Clock className="text-primary" /> Workout History
         </h1>
         <p className="text-textMuted mt-1 font-medium tracking-wide">Your past accomplishments</p>
       </header>
@@ -123,13 +123,13 @@ export function History() {
           </>
         ) : workouts.length === 0 ? (
           <Card className="text-center py-10 border-dashed border-2 border-white/10 bg-white/5">
-            <Dumbbell className="mx-auto text-textMuted mb-4 opacity-50 drop-shadow-md" size={48} />
+            <Dumbbell className="mx-auto text-textMuted mb-4 opacity-50" size={48} />
             <h3 className="text-lg font-bold text-white/90">No workouts yet</h3>
             <p className="text-textMuted text-sm mt-2">Log your first workout to see it here!</p>
           </Card>
         ) : (
           workouts.map(workout => (
-            <Card key={workout.id} className="hover:border-primary/40 hover:shadow-glow transition-all duration-300 group">
+            <Card key={workout.id} className="transition-all duration-300 group">
               <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
                 <span className="font-bold text-lg text-white/95 group-hover:text-primary transition-colors">{format(new Date(workout.date), 'MMM dd, yyyy')}</span>
                 <div className="flex items-center gap-3">
@@ -138,7 +138,7 @@ export function History() {
                   </div>
                   <button 
                     onClick={() => handleDelete(workout.id)}
-                    className="text-textMuted hover:text-red-500 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)] transition-all p-1.5 rounded-md hover:bg-white/5 active:scale-95"
+                    className="text-textMuted hover:text-red-500 transition-all p-1.5 rounded-md hover:bg-white/5 active:scale-95"
                     title="Delete workout"
                   >
                     <Trash2 size={18} />

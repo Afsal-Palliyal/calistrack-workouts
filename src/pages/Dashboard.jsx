@@ -97,8 +97,8 @@ export function Dashboard() {
           <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Dashboard</h1>
           <p className="text-textMuted font-medium tracking-wide mt-1">Welcome back</p>
         </div>
-        <div className="bg-white/5 p-3 rounded-[20px] border border-white/10 shadow-glass backdrop-blur-md">
-          <Trophy className="text-accent drop-shadow-[0_0_8px_rgba(192,38,211,0.8)]" size={28} />
+        <div className="bg-[#1A1A1A] p-3 rounded-[20px] border border-white/10">
+          <Trophy className="text-accent" size={28} />
         </div>
       </header>
 
@@ -106,13 +106,13 @@ export function Dashboard() {
         
         {/* Left Column (Cards) */}
         <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
-          <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-primary/20 via-white/5 to-transparent border-primary/30 hover:border-primary/50 transition-all hover:shadow-glow group cursor-default h-full">
-            <Flame size={40} className="text-primary mb-4 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(14,165,233,0.8)]" />
+          <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-[#1A1A1A] border border-white/10 transition-all group cursor-default h-full">
+            <Flame size={40} className="text-primary mb-4 group-hover:scale-110 transition-transform" />
             {loading ? <div className="w-16 h-12 bg-white/10 animate-pulse rounded-xl mb-1" /> : <span className="text-5xl font-bold text-white">{weeklyReps}</span>}
             <span className="text-[12px] font-bold text-primary uppercase tracking-widest mt-3 text-center opacity-80">Weekly Reps</span>
           </Card>
-          <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-gradient-to-br from-accent/20 via-white/5 to-transparent border-accent/30 hover:border-accent/50 transition-all hover:shadow-glow-accent group cursor-pointer h-full">
-            <Trophy size={40} className="text-accent mb-4 group-hover:scale-110 transition-transform drop-shadow-[0_0_10px_rgba(192,38,211,0.8)]" />
+          <Card className="flex flex-col items-center justify-center p-6 lg:p-8 bg-[#1A1A1A] border border-white/10 transition-all hover:bg-white/5 group cursor-pointer h-full">
+            <Trophy size={40} className="text-accent mb-4 group-hover:scale-110 transition-transform" />
             {loading ? <div className="w-16 h-12 bg-white/10 animate-pulse rounded-xl mb-1" /> : <span className="text-5xl font-bold text-white">{totalWorkouts}</span>}
             <span className="text-[12px] font-bold text-accent uppercase tracking-widest mt-3 text-center opacity-80">Workouts (30D)</span>
           </Card>

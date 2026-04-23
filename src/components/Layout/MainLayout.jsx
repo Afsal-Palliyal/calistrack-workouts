@@ -11,7 +11,7 @@ export function MainLayout() {
       {/* Desktop Sidebar (hidden on mobile) */}
       <aside className="hidden md:flex flex-col w-64 border-r border-white/5 bg-background/80 backdrop-blur-2xl flex-none z-50">
         <div className="h-24 flex items-center px-8 border-b border-white/5 gap-3">
-          <div className="p-2 bg-primary/10 rounded-xl shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+          <div className="p-2 bg-primary/10 rounded-xl">
             <Activity className="text-primary" size={24} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
@@ -20,26 +20,26 @@ export function MainLayout() {
         </div>
         
         <nav className="flex-1 px-4 py-8 space-y-4">
-          <NavLink to="/" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-primary bg-primary/10 shadow-[0_0_20px_rgba(14,165,233,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+          <NavLink to="/" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-primary bg-primary/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
             {({ isActive }) => (
               <>
-                <Home size={22} className={`transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]' : ''}`} />
+                <Home size={22} className={`transition-all duration-300`} />
                 <span className="font-bold tracking-wide text-sm">Dashboard</span>
               </>
             )}
           </NavLink>
-          <NavLink to="/log" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-accent bg-accent/10 shadow-[0_0_20px_rgba(192,38,211,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+          <NavLink to="/log" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-accent bg-accent/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
             {({ isActive }) => (
               <>
-                <ClipboardList size={22} className={`transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(192,38,211,0.8)]' : ''}`} />
+                <ClipboardList size={22} className={`transition-all duration-300`} />
                 <span className="font-bold tracking-wide text-sm">Log Workout</span>
               </>
             )}
           </NavLink>
-          <NavLink to="/history" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-primary bg-primary/10 shadow-[0_0_20px_rgba(14,165,233,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+          <NavLink to="/history" className={({isActive}) => `flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${isActive ? 'text-primary bg-primary/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
             {({ isActive }) => (
               <>
-                <Clock size={22} className={`transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]' : ''}`} />
+                <Clock size={22} className={`transition-all duration-300`} />
                 <span className="font-bold tracking-wide text-sm">History</span>
               </>
             )}
@@ -86,26 +86,26 @@ export function MainLayout() {
         {/* Mobile Bottom Nav (hidden on desktop) */}
         <nav className="md:hidden fixed bottom-0 w-full bg-background/80 backdrop-blur-2xl border-t border-white/5 z-40">
           <div className="max-w-xl mx-auto flex justify-around items-center h-20 px-2 pb-safe">
-            <NavLink to="/" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-primary bg-primary/10 shadow-[0_0_20px_rgba(14,165,233,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+            <NavLink to="/" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-primary bg-primary/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
               {({ isActive }) => (
                 <>
-                  <Home size={22} className={`mb-1 transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]' : ''}`} />
+                  <Home size={22} className={`mb-1 transition-all duration-300`} />
                   <span className="text-[10px] font-bold tracking-wide">Dash</span>
                 </>
               )}
             </NavLink>
-            <NavLink to="/log" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-accent bg-accent/10 shadow-[0_0_20px_rgba(192,38,211,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+            <NavLink to="/log" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-accent bg-accent/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
               {({ isActive }) => (
                 <>
-                  <ClipboardList size={22} className={`mb-1 transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(192,38,211,0.8)]' : ''}`} />
+                  <ClipboardList size={22} className={`mb-1 transition-all duration-300`} />
                   <span className="text-[10px] font-bold tracking-wide">Log</span>
                 </>
               )}
             </NavLink>
-            <NavLink to="/history" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-primary bg-primary/10 shadow-[0_0_20px_rgba(14,165,233,0.15)]' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
+            <NavLink to="/history" className={({isActive}) => `flex flex-col items-center justify-center py-2 px-4 rounded-2xl transition-all duration-300 w-20 ${isActive ? 'text-primary bg-primary/10' : 'text-textMuted hover:text-text hover:bg-white/5'}`}>
               {({ isActive }) => (
                 <>
-                  <Clock size={22} className={`mb-1 transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]' : ''}`} />
+                  <Clock size={22} className={`mb-1 transition-all duration-300`} />
                   <span className="text-[10px] font-bold tracking-wide">History</span>
                 </>
               )}

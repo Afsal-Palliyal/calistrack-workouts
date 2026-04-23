@@ -36,17 +36,15 @@ export function Login() {
 
   return (
     <div className="w-full max-w-sm mx-auto flex flex-col items-center justify-center min-h-screen px-4 pb-20 pt-10">
-      <div className="bg-primary/10 p-5 rounded-full mb-8 relative shadow-[0_0_30px_rgba(14,165,233,0.3)]">
-        <div className="absolute inset-0 bg-primary/30 blur-2xl rounded-full"></div>
-        <Activity size={56} className="text-primary relative z-10 drop-shadow-[0_0_10px_rgba(14,165,233,0.6)]" />
+      <div className="bg-[#1A1A1A] border border-white/10 p-5 rounded-full mb-8 relative">
+        <Activity size={56} className="text-primary relative z-10" />
       </div>
       <h1 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent tracking-tight">
         Calistrack
       </h1>
       <p className="text-textMuted mb-10 text-center font-medium tracking-wide">Track your bodyweight journey</p>
 
-      <Card className="w-full relative shadow-glow">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-[20px] pointer-events-none"></div>
+      <Card className="w-full relative">
         <h2 className="text-2xl font-bold mb-6 text-center text-white/90">
           {isLogin ? 'Welcome Back' : 'Create Account'}
         </h2>
@@ -73,7 +71,7 @@ export function Login() {
               className="input-field"
             />
           </div>
-          <Button type="submit" disabled={loading} className="mt-4 py-4 text-lg tracking-wide shadow-glow">
+          <Button type="submit" disabled={loading} className="mt-4 py-4 text-lg tracking-wide">
             {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
           </Button>
         </form>

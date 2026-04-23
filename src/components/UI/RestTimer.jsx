@@ -100,7 +100,7 @@ export function RestTimer() {
       
       {/* Expanded Timer */}
       <div 
-        className={`bg-background/90 backdrop-blur-xl border border-white/10 p-5 rounded-3xl shadow-glass transition-all duration-300 transform origin-bottom-right pointer-events-auto mb-4 ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}
+        className={`bg-[#1A1A1A] border border-white/10 p-5 rounded-3xl transition-all duration-300 transform origin-bottom-right pointer-events-auto mb-4 ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}`}
       >
         <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-2">
           <span className="font-bold text-sm text-textMuted tracking-wide uppercase">Rest Timer</span>
@@ -175,7 +175,7 @@ export function RestTimer() {
       {!isOpen && (
         <button 
           onClick={() => setIsOpen(true)}
-          className="pointer-events-auto p-4 bg-background/80 backdrop-blur-md border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] rounded-full hover:bg-white/5 transition-all group relative"
+          className="pointer-events-auto p-4 bg-[#1A1A1A] border border-white/10 rounded-full hover:bg-white/5 transition-all group relative"
         >
           <Timer size={24} className="text-primary group-hover:scale-110 transition-transform" />
           {isActive && (

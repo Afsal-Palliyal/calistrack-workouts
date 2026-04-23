@@ -61,7 +61,7 @@ export function Logger() {
 
       <header className="mt-2 text-center md:text-left">
         <h1 className="text-3xl font-bold flex items-center justify-center md:justify-start gap-2 text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-          <FilePlus2 className="text-primary drop-shadow-[0_0_8px_rgba(14,165,233,0.8)]" /> Log Workout
+          <FilePlus2 className="text-primary" /> Log Workout
         </h1>
         <p className="text-textMuted mt-1 font-medium tracking-wide">Record your daily calisthenics routine</p>
       </header>
@@ -81,9 +81,8 @@ export function Logger() {
           <h2 className="text-lg font-bold text-white/90 border-b border-white/10 pb-3">Exercises</h2>
           
           {exercises.map((ex, idx) => (
-            <div key={ex.name} className="bg-white/5 p-5 rounded-[20px] border border-white/10 transition-all hover:border-primary/40 hover:shadow-glow group relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-              <h3 className="font-bold text-primary mb-4 text-xl tracking-tight group-hover:drop-shadow-[0_0_8px_rgba(14,165,233,0.8)] transition-all flex items-center justify-between">
+            <div key={ex.name} className="bg-[#1A1A1A] p-5 rounded-[20px] border border-white/10 transition-all group relative overflow-hidden">
+              <h3 className="font-bold text-primary mb-4 text-xl tracking-tight transition-all flex items-center justify-between">
                 {ex.name}
               </h3>
               
@@ -102,7 +101,7 @@ export function Logger() {
                       onChange={(e) => updateExercise(idx, 'sets', 0, true, parseInt(e.target.value) || 0)}
                       className="w-12 sm:w-16 text-center bg-transparent border-none focus:outline-none focus:ring-0 font-bold text-2xl"
                     />
-                    <button type="button" onClick={() => updateExercise(idx, 'sets', 1)} className="p-3 bg-white/5 text-textMuted hover:text-primary hover:bg-primary/20 border border-white/10 hover:border-primary/40 transition-all rounded-xl active:scale-95 shadow-sm hover:shadow-glow">
+                    <button type="button" onClick={() => updateExercise(idx, 'sets', 1)} className="p-3 bg-white/5 text-textMuted hover:text-white hover:bg-white/10 border border-white/10 transition-all rounded-xl active:scale-95 shadow-sm">
                       <Plus size={18} />
                     </button>
                   </div>
@@ -120,7 +119,7 @@ export function Logger() {
                       onChange={(e) => updateExercise(idx, 'reps', 0, true, parseInt(e.target.value) || 0)}
                       className="w-12 sm:w-16 text-center bg-transparent border-none focus:outline-none focus:ring-0 font-bold text-2xl"
                     />
-                    <button type="button" onClick={() => updateExercise(idx, 'reps', 1)} className="p-3 bg-white/5 text-textMuted hover:text-accent hover:bg-accent/20 border border-white/10 hover:border-accent/40 transition-all rounded-xl active:scale-95 shadow-sm hover:shadow-glow-accent">
+                    <button type="button" onClick={() => updateExercise(idx, 'reps', 1)} className="p-3 bg-white/5 text-textMuted hover:text-white hover:bg-white/10 border border-white/10 transition-all rounded-xl active:scale-95 shadow-sm">
                       <Plus size={18} />
                     </button>
                   </div>
@@ -134,7 +133,7 @@ export function Logger() {
         <Button 
           onClick={handleSave} 
           disabled={isSubmitting} 
-          className={`mt-8 shadow-glass transition-all duration-300 ${isSubmitting ? 'opacity-70 scale-95 pointer-events-none bg-primaryHover' : ''}`}
+          className={`mt-8 transition-all duration-300 ${isSubmitting ? 'opacity-70 scale-95 pointer-events-none bg-primaryHover' : ''}`}
         >
           {isSubmitting ? 'Saving...' : 'Save Workout'}
         </Button>
