@@ -35,6 +35,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isAuthLoading: loading,
     login,
     signup,
     logout
