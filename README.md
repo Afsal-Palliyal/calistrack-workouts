@@ -48,7 +48,7 @@ Generic fitness apps are often cluttered and overly complex. Calistrack delivers
 
 ### 📸 Preview
 
-![Calistrack Dashboard](./src/assets/dashboard-preview.png)
+![Calistrack Dashboard](./src/assets/desktop-preview.png)
 
 ---
 
